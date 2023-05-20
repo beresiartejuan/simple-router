@@ -1,6 +1,6 @@
 import http from "http";
 import cors from "http-cors";
-import router from "./../src/router.js";
+import router from "./../src/index.js";
 
 const port = process.env.PORT || 3000;
 

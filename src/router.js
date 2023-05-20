@@ -98,20 +98,14 @@ export default new class router {
 
     express({ show_page_not_found, extends_response } = { show_page_not_found: false, extends_response: false }) {
 
-        console.log("DEV: se setea para expres");
-
         this.can_show_404_page = show_page_not_found;
 
         return (req, res, next) => {
-
-            console.log("DEV: Se corre el mid de express");
 
             this.setRequest(req);
             this.setResponse(res, extends_response);
 
             this.matchUrl(req.url, req.method);
-
-            console.log("DEV: Se corre el mid de express y se hizo el match");
 
             if (this.can_show_404_page && this.has_error) return;
 
