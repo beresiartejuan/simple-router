@@ -19,21 +19,42 @@ export default new class router {
         this.all_routes[this.POST_METHOD] = [];
     }
 
+    /**
+     * @name setPathForViews
+     * @description Declare a path for all views used on this router
+     * @param {string} absolute_path 
+     */
     setPathForViews(absolute_path) {
         this.path_for_views = absolute_path;
     }
 
+    /**
+     * @name setRequest
+     * @description Set a RequestObject
+     * @param {object} request 
+     */
     setRequest(request) {
         this.request = request;
     }
 
-    getRequest(data = {}) {
-        return {
-            ...this.request,
-            ...data
-        };
+    /**
+     * @name getRequest
+     * @description Return a Request Object if you was set one
+     * @param {function | object} fn A funcion with one param(The response object)
+     * @returns {object} A ResponseObject
+     */
+    getRequest(fn = () => { }) {
+        if (typeof fn === "function") fn(this.request);
+        if (typeof fn === "object") this.request.extra = fn;
+        return this.request;
     }
 
+    /**
+     * @name setResponse
+     * @description Set a ResponseObject
+     * @param {object} response
+     * @param {boolean} add_methods Do you want the router to add different methods to the ResponseObject?
+     */
     setResponse(response, add_methods = true) {
 
         this.response = response;
@@ -51,8 +72,15 @@ export default new class router {
         };
     }
 
+    /**
+     * @name getResponse
+     * @description Return a Response Object if you was set one
+     * @param {function | object} fn A funcion with one param(The response object)
+     * @returns {object} A ResponseObject
+     */
     getResponse(fn = () => { }) {
         if (typeof fn === "function") fn(this.response);
+        if (typeof fn === "object") this.response.extra = fn;
         return this.response;
     }
 
