@@ -12,10 +12,6 @@ router.get('/', () => {
     return "Hello!";
 });
 
-router.get('/', () => {
-
-});
-
 const server = http.createServer((req, res) => {
 
     if (cors(req, res)) return;
